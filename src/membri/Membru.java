@@ -37,6 +37,19 @@ public abstract class Membru {
         return ACCEPTED;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Membru membru = (Membru) o;
+        return membruId.equals(membru.membruId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(membruId);
+    }
+
     public String getREJECTED() {
         return REJECTED;
     }
@@ -82,19 +95,6 @@ public abstract class Membru {
                 ", Statut='" + statut + '\'' +
                 ", DataInscriere=" + dataInscriere +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Membru membru = (Membru) o;
-        return nume.equals(membru.nume) && prenume.equals(membru.prenume) && statut.equals(membru.statut) && dataInscriere.equals(membru.dataInscriere);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nume, prenume, statut, dataInscriere);
     }
 
     protected void acceptMember() {

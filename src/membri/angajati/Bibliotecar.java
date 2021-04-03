@@ -49,19 +49,6 @@ public class Bibliotecar extends Angajat{
         this.dataNasterii = dataNasterii;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Bibliotecar that = (Bibliotecar) o;
-        return Objects.equals(sectiuni, that.sectiuni) && Objects.equals(dataNasterii, that.dataNasterii);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), sectiuni, dataNasterii);
-    }
 
     @Override
     public String toString() {

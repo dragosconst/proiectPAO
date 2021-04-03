@@ -1,7 +1,9 @@
 package membri;
 
+import carte.Carte;
+
 import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 
 /**
  * popularitate se refera la cate carti de-ale autorului au fost citite recent
@@ -12,6 +14,7 @@ public class Autor extends Membru{
     private static Integer lastMembruId = 0;
     private Double discount;
     private String descriere;
+    private List<Carte> carti;
 
     public Autor(String nume, String prenume, String statut, Date dataInscriere, String descriere)
     {
@@ -54,18 +57,12 @@ public class Autor extends Membru{
         this.discount = discount;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Autor autor = (Autor) o;
-        return Objects.equals(popularitate, autor.popularitate) && Objects.equals(discount, autor.discount) && Objects.equals(descriere, autor.descriere);
+    public List<Carte> getCarti() {
+        return carti;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), popularitate, discount, descriere);
+    public void setCarti(List<Carte> carti) {
+        this.carti = carti;
     }
 
     @Override

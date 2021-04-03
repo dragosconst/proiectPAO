@@ -48,20 +48,6 @@ public abstract class Angajat extends Membru {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Angajat angajat = (Angajat) o;
-        return Objects.equals(salariu, angajat.salariu) && Objects.equals(commission, angajat.commission);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), salariu, commission);
-    }
-
     public void raiseSalaryPercent(double raisePercentage) {
         this.salariu += raisePercentage * this.salariu;
     }
