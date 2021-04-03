@@ -12,14 +12,14 @@ import java.util.*;
 public class Biblioteca {
     private int bibliotecaId;
     private static int lastBibliotecaId;
-    private Set<Aripa> aripi;
-    private Set<Sectiune> sectiuni;
-    private Set<Angajat> angajati;
-    private SortedSet<Autor>  autori;
-    private SortedSet<Carte>  carti;
+    private HashSet<Aripa> aripi;
+    private HashSet<Sectiune> sectiuni;
+    private HashSet<Angajat> angajati;
+    private TreeSet<Autor>  autori;
+    private TreeSet<Carte>  carti;
     private TreeMap<String, Carte> cartiDenumiri;
 
-    public Biblioteca(Set<Aripa> aripi, Set<Sectiune> sectiuni, Set<Angajat> angajati, SortedSet<Autor> autori, SortedSet<Carte> carti) {
+    public Biblioteca(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti) {
         this.bibliotecaId = lastBibliotecaId + 1;
         lastBibliotecaId += 1;
         this.aripi = aripi;
@@ -27,6 +27,7 @@ public class Biblioteca {
         this.angajati = angajati;
         this.autori = autori;
         this.carti = carti;
+        this.cartiDenumiri = new TreeMap<>();
         this.generateTreeSet();
     }
 
@@ -42,72 +43,67 @@ public class Biblioteca {
         return bibliotecaId;
     }
 
-    public void setBibliotecaId(int bibliotecaId) {
-        this.bibliotecaId = bibliotecaId;
-    }
-
-    public static int getLastBibliotecaId() {
-        return lastBibliotecaId;
-    }
-
-    public static void setLastBibliotecaId(int lastBibliotecaId) {
-        Biblioteca.lastBibliotecaId = lastBibliotecaId;
-    }
-
-    public Set<Aripa> getAripi() {
+    public HashSet<Aripa> getAripi() {
         return aripi;
     }
 
-    public void setAripi(Set<Aripa> aripi) {
+    public void setAripi(HashSet<Aripa> aripi) {
         this.aripi = aripi;
+    }
+
+    public TreeSet<Carte> getCarti() {
+        return carti;
+    }
+
+    public void setCarti(TreeSet<Carte> carti) {
+        this.carti = carti;
+    }
+
+    public HashSet<Sectiune> getSectiuni() {
+        return sectiuni;
+    }
+
+    public void setSectiuni(HashSet<Sectiune> sectiuni) {
+        this.sectiuni = sectiuni;
+    }
+
+    public HashSet<Angajat> getAngajati() {
+        return angajati;
+    }
+
+    public void setAngajati(HashSet<Angajat> angajati) {
+        this.angajati = angajati;
+    }
+
+    public TreeSet<Autor> getAutori() {
+        return autori;
+    }
+
+    public void setAutori(TreeSet<Autor> autori) {
+        this.autori = autori;
+    }
+
+    public Autor findAutor(int autorId) {
+        for(Autor it: this.autori){
+            if(it.getMembruId() == autorId)
+                return it;
+        }
+
+        return null;
     }
 
     public void addAripi(Aripa aripa){
         this.aripi.add(aripa);
     }
 
-    public Set<Sectiune> getSectiuni() {
-        return sectiuni;
-    }
-
-    public void setSectiuni(Set<Sectiune> sectiuni) {
-        this.sectiuni = sectiuni;
-    }
 
     public void addSectiune(Sectiune sectiune) {
         this.sectiuni.add(sectiune);
     }
 
-    public Set<Angajat> getAngajati() {
-        return angajati;
-    }
-
-    public void setAngajati(Set<Angajat> angajati) {
-        this.angajati = angajati;
-    }
-
-    public void addAngajat(Angajat angajat){
-        this.angajati.add(angajat);
-    }
-
-    public Set<Autor> getAutori() {
-        return autori;
-    }
-
-    public void setAutori(SortedSet<Autor> autori) {
-        this.autori = autori;
-    }
 
     public void addAutor(Autor autor) {
         this.autori.add(autor);
-    }
-
-    public Set<Carte> getCarti() {
-        return carti;
-    }
-
-    public void setCarti(SortedSet<Carte> carti) {
-        this.carti = carti;
     }
 
     public void addCarte(Carte carte){
@@ -153,7 +149,7 @@ public class Biblioteca {
         // get section from set
         Integer aripaId = null;
         for(Sectiune it: this.sectiuni){
-            if(it.getSectiuneId() == carte.getSectiuneId()){
+            if(carte.getSectiuneId().contains(it.getSectiuneId())){
                 totalDiscount += it.getDiscount();
                 aripaId = it.getAripaId();
                 break;

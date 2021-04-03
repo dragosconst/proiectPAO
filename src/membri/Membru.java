@@ -16,9 +16,9 @@ public abstract class Membru {
     private String prenume;
     private String statut;
     private Date dataInscriere;
-    private final String WAITING = "in asteptare";
-    private final String ACCEPTED = "membru deplin";
-    private final String REJECTED = "respins";
+    private final static String WAITING = "in asteptare";
+    private final static String ACCEPTED = "membru deplin";
+    private final static String REJECTED = "respins";
 
     public Membru(String nume, String prenume, String statut, Date dataInscriere, Integer membruId) {
         this.nume = nume;
@@ -29,11 +29,11 @@ public abstract class Membru {
         this.membruId = membruId;
     }
 
-    public String getWAITING() {
+    public static String getWAITING() {
         return WAITING;
     }
 
-    public String getACCEPTED() {
+    public static String getACCEPTED() {
         return ACCEPTED;
     }
 
@@ -50,7 +50,7 @@ public abstract class Membru {
         return Objects.hash(membruId);
     }
 
-    public String getREJECTED() {
+    public static String getREJECTED() {
         return REJECTED;
     }
 

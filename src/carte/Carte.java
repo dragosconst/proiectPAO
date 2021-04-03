@@ -1,5 +1,6 @@
 package carte;
 
+import administrativ.Sectiune;
 import membri.Autor;
 
 import java.util.List;
@@ -8,15 +9,16 @@ import java.util.Objects;
 public class Carte implements Comparable<Carte>{
     private final int carteId;
     private final int autorId;
-    private int sectiuneId;
+    private List<Integer> sectiuneId;
     private static int lastCarteId = 0;
     private String denumire;
     private List<String> genuri;
     private Double pret;
     private Double discount;
     private int totalImprumuturi;
+    private int nrExemplare;
 
-    public Carte(int autorId, int sectiuneId, String denumire, List<String> genuri, Double pret, Double discount) {
+    public Carte(int autorId, List<Integer> sectiuneId, String denumire, List<String> genuri, Double pret, Double discount, int nrExemplare) {
         this.carteId = lastCarteId + 1;
         lastCarteId += 1;
         this.autorId = autorId;
@@ -25,7 +27,7 @@ public class Carte implements Comparable<Carte>{
         this.genuri = genuri;
         this.pret = pret;
         this.discount = discount;
-        this.totalImprumuturi = 0;
+        this.nrExemplare = nrExemplare;
     }
 
     public Carte(Carte other){
@@ -37,6 +39,7 @@ public class Carte implements Comparable<Carte>{
         this.pret = other.pret;
         this.discount = other.discount;
         this.totalImprumuturi = other.totalImprumuturi;
+        this.nrExemplare = other.nrExemplare;
     }
 
     public int getCarteId() {
@@ -51,12 +54,24 @@ public class Carte implements Comparable<Carte>{
         return totalImprumuturi;
     }
 
-    public int getSectiuneId() {
+    public int getNrExemplare() {
+        return nrExemplare;
+    }
+
+    public void setNrExemplare(int nrExemplare) {
+        this.nrExemplare = nrExemplare;
+    }
+
+    public void setSectiuneId(List<Integer> sectiuneId) {
+        this.sectiuneId = sectiuneId;
+    }
+
+    public List<Integer> getSectiuneId() {
         return sectiuneId;
     }
 
-    public void setSectiuneId(int sectiuneId) {
-        this.sectiuneId = sectiuneId;
+    public void addSectiune(int sectiuneId){
+        this.sectiuneId.add(sectiuneId);
     }
 
     public String getDenumire() {
