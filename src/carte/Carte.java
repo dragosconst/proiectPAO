@@ -1,9 +1,11 @@
 package carte;
 
+import membri.Autor;
+
 import java.util.List;
 import java.util.Objects;
 
-public class Carte {
+public class Carte implements Comparable<Carte>{
     private final int carteId;
     private final int autorId;
     private int sectiuneId;
@@ -24,6 +26,17 @@ public class Carte {
         this.pret = pret;
         this.discount = discount;
         this.totalImprumuturi = 0;
+    }
+
+    public Carte(Carte other){
+        this.carteId = other.carteId;
+        this.autorId = other.autorId;
+        this.sectiuneId = other.sectiuneId;
+        this.denumire = other.denumire;
+        this.genuri = other.genuri;
+        this.pret = other.pret;
+        this.discount = other.discount;
+        this.totalImprumuturi = other.totalImprumuturi;
     }
 
     public int getCarteId() {
@@ -105,5 +118,11 @@ public class Carte {
 
     public void imprumuta() {
         this.totalImprumuturi += 1;
+    }
+
+    @Override
+    public int compareTo(Carte o) {
+        if (this == o) return 0;
+        return this.getDenumire().compareTo(o.getDenumire());
     }
 }
