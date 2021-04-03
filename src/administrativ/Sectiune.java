@@ -69,11 +69,7 @@ public class Sectiune {
 
     @Override
     public String toString() {
-        return "Sectiune{" +
-                "denumire='" + denumire + '\'' +
-                ", genuri=" + genuri +
-                ", discount=" + discount +
-                '}';
+        return this.denumire;
     }
 
 
