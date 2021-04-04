@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public class Carte implements Comparable<Carte>{
     private final int carteId;
-    private final int autorId;
-    private List<Integer> sectiuneId;
+    private final Autor autor;
+    private List<Sectiune> sectiuni;
     private static int lastCarteId = 0;
     private String denumire;
     private List<String> genuri;
@@ -18,11 +18,11 @@ public class Carte implements Comparable<Carte>{
     private int totalImprumuturi;
     private int nrExemplare;
 
-    public Carte(int autorId, List<Integer> sectiuneId, String denumire, List<String> genuri, Double pret, Double discount, int nrExemplare) {
+    public Carte(Autor autor, List<Sectiune> sectiuni, String denumire, List<String> genuri, Double pret, Double discount, int nrExemplare) {
         this.carteId = lastCarteId + 1;
         lastCarteId += 1;
-        this.autorId = autorId;
-        this.sectiuneId = sectiuneId;
+        this.autor = autor;
+        this.sectiuni = sectiuni;
         this.denumire = denumire;
         this.genuri = genuri;
         this.pret = pret;
@@ -32,8 +32,8 @@ public class Carte implements Comparable<Carte>{
 
     public Carte(Carte other){
         this.carteId = other.carteId;
-        this.autorId = other.autorId;
-        this.sectiuneId = other.sectiuneId;
+        this.autor = other.autor;
+        this.sectiuni = other.sectiuni;
         this.denumire = other.denumire;
         this.genuri = other.genuri;
         this.pret = other.pret;
@@ -46,8 +46,8 @@ public class Carte implements Comparable<Carte>{
         return carteId;
     }
 
-    public int getAutorId() {
-        return autorId;
+    public Autor getAutor() {
+        return autor;
     }
 
     public int getTotalImprumuturi() {
@@ -62,16 +62,16 @@ public class Carte implements Comparable<Carte>{
         this.nrExemplare = nrExemplare;
     }
 
-    public void setSectiuneId(List<Integer> sectiuneId) {
-        this.sectiuneId = sectiuneId;
+    public List<Sectiune> getSectiuni() {
+        return sectiuni;
     }
 
-    public List<Integer> getSectiuneId() {
-        return sectiuneId;
+    public void setSectiuni(List<Sectiune> sectiuni) {
+        this.sectiuni = sectiuni;
     }
 
-    public void addSectiune(int sectiuneId){
-        this.sectiuneId.add(sectiuneId);
+    public void addSectiune(Sectiune sectiune){
+        this.sectiuni.add(sectiune);
     }
 
     public String getDenumire() {
@@ -121,14 +121,9 @@ public class Carte implements Comparable<Carte>{
 
     @Override
     public String toString() {
-        return "Carte{" +
-                "autorId=" + autorId +
-                ", sectiuneId=" + sectiuneId +
-                ", denumire='" + denumire + '\'' +
-                ", genuri=" + genuri +
-                ", pret=" + pret +
-                ", discount=" + discount +
-                '}';
+        return "Titlu: " + this.denumire + "\nAutor: " + this.getAutor().getNume() + " " + this.getAutor().getPrenume() +
+                "\nGenuri: " + this.getGenuri() + "\nSectiuni: " + this.getSectiuni() + "\nPret: " + this.getPret() +
+                "\nNr exemplare: " + this.getNrExemplare();
     }
 
     public void imprumuta() {

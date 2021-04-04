@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class ITist extends Angajat{
     public List<String> servere;
+    public static final double IT_com = 0.2;
 
     public ITist(String nume, String prenume, String statut, Date dataInscriere, Double salariu, List<String> servere) {
         super(nume, prenume, statut, dataInscriere, salariu);
@@ -30,5 +31,12 @@ public class ITist extends Angajat{
         return super.toString() + "ITist{" +
                 "servere=" + servere +
                 '}';
+    }
+
+    // ITistii au un boost de salariu separat
+    @Override
+    public Double totalIncome() {
+        Double regIncome = super.totalIncome();
+        return regIncome + regIncome * IT_com;
     }
 }

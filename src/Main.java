@@ -28,19 +28,19 @@ public class Main {
         aripi.add(ar1);
         aripi.add(ar2);
 
-        Sectiune s1 = new Sectiune(ar1.getAripaId(), "sectiunea s1", Arrays.asList("SF", "roman istoric"), 0.0);
-        Sectiune s2 = new Sectiune(ar1.getAripaId(), "sectiunea s2", Arrays.asList("roman"), 0.02);
-        Sectiune s3 = new Sectiune(ar2.getAripaId(), "sectiunea d1", Arrays.asList("fantasy", "beletristica"), 0.0);
+        Sectiune s1 = new Sectiune(ar1, "sectiunea s1", Arrays.asList("SF", "roman istoric"), 0.0);
+        Sectiune s2 = new Sectiune(ar1, "sectiunea s2", Arrays.asList("roman"), 0.02);
+        Sectiune s3 = new Sectiune(ar2, "sectiunea d1", Arrays.asList("fantasy", "beletristica"), 0.0);
         sectiuni.add(s1);
         sectiuni.add(s2);
         sectiuni.add(s3);
 
-        Carte c1 = new Carte(a1.getMembruId(), Arrays.asList(s1.getSectiuneId()), "Fundatia", Arrays.asList("SF"), 12.0, 0.1, 200);
-        Carte c2 = new Carte(a1.getMembruId(), Arrays.asList(s1.getSectiuneId()), "Eu, robotul", Arrays.asList("SF"), 16.0, 0.0, 30);
-        Carte c3 = new Carte(a2.getMembruId(), Arrays.asList(s2.getSectiuneId()), "Ion", Arrays.asList("roman"), 5.0, 0.25, 10);
-        Carte c4 = new Carte(a3.getMembruId(), Arrays.asList(s3.getSectiuneId()), "Stapanul Inelelor 1", Arrays.asList("fantasy"), 10.0, 0.0, 100);
-        Carte c5 = new Carte(a3.getMembruId(), Arrays.asList(s3.getSectiuneId()), "Stapanul Inelelor 2", Arrays.asList("fantasy"), 10.0, 0.0, 120);
-        Carte c6 = new Carte(a3.getMembruId(), Arrays.asList(s3.getSectiuneId()), "Stapanul Inelelor 3", Arrays.asList("fantasy"), 10.0, 0.0, 110);
+        Carte c1 = new Carte(a1, Arrays.asList(s1), "Fundatia", Arrays.asList("SF"), 12.0, 0.1, 200);
+        Carte c2 = new Carte(a1, Arrays.asList(s1), "Eu, robotul", Arrays.asList("SF"), 16.0, 0.0, 30);
+        Carte c3 = new Carte(a2, Arrays.asList(s2), "Ion", Arrays.asList("roman"), 5.0, 0.25, 10);
+        Carte c4 = new Carte(a3, Arrays.asList(s3),"Stapanul Inelelor 1", Arrays.asList("fantasy"), 10.0, 0.0, 100);
+        Carte c5 = new Carte(a3, Arrays.asList(s3), "Stapanul Inelelor 2", Arrays.asList("fantasy"), 10.0, 0.0, 120);
+        Carte c6 = new Carte(a3, Arrays.asList(s3), "Stapanul Inelelor 3", Arrays.asList("fantasy"), 10.0, 0.0, 110);
         carti.addAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
 
         Angajat b1 = new Bibliotecar("Ion", "Ion", Membru.getACCEPTED(), new Date(2000, 1, 3), 1900.0);

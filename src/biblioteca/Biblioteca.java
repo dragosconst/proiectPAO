@@ -92,6 +92,14 @@ public class Biblioteca {
         return null;
     }
 
+    public Sectiune findSectiune(int sectiuneId) {
+        for(Sectiune s: this.sectiuni) {
+            if(s.getSectiuneId() == sectiuneId)
+                return s;
+        }
+        return null;
+    }
+
     public void addAripi(Aripa aripa){
         this.aripi.add(aripa);
     }
@@ -100,7 +108,6 @@ public class Biblioteca {
     public void addSectiune(Sectiune sectiune) {
         this.sectiuni.add(sectiune);
     }
-
 
     public void addAutor(Autor autor) {
         this.autori.add(autor);
@@ -136,29 +143,21 @@ public class Biblioteca {
             }
         }
         totalDiscount += carte.getDiscount();
-
-        // get autor from set
-        Autor autor = null;
-        for(Autor it: this.autori){
-            if(it.getMembruId() == carte.getAutorId()) {
-                totalDiscount += it.getDiscount();
-                break;
-            }
-        }
+        totalDiscount += carte.getAutor().getDiscount();
 
         // get section from set
         Integer aripaId = null;
+        List<Integer> aripi = new ArrayList<>();
         for(Sectiune it: this.sectiuni){
-            if(carte.getSectiuneId().contains(it.getSectiuneId())){
+            if(carte.getSectiuni().contains(it)){
                 totalDiscount += it.getDiscount();
-                aripaId = it.getAripaId();
-                break;
+                aripi.add(it.getAripa().getAripaId());
             }
         }
 
         // get aripa from set
         for(Aripa it: this.aripi) {
-            if(it.getAripaId() == aripaId){
+            if(aripi.contains(it.getAripaId())){
                 totalDiscount += it.getDiscount();
                 break;
             }

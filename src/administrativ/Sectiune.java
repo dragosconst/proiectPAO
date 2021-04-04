@@ -7,16 +7,16 @@ import java.util.Objects;
 
 public class Sectiune {
     private final int sectiuneId;
-    private final int aripaId;
+    private final Aripa aripa;
     private static int lastSectiuneId = 0;
     private String denumire;
     private List<String> genuri;
     private Double discount;
 
-    public Sectiune(int aripaId, String denumire, List<String> genuri, Double discount) {
+    public Sectiune(Aripa aripa, String denumire, List<String> genuri, Double discount) {
         this.sectiuneId = lastSectiuneId + 1;
         lastSectiuneId += 1;
-        this.aripaId = aripaId;
+        this.aripa = aripa;
         this.denumire = denumire;
         this.genuri = genuri;
         this.discount = discount;
@@ -26,8 +26,8 @@ public class Sectiune {
         return sectiuneId;
     }
 
-    public int getAripaId() {
-        return aripaId;
+    public Aripa getAripa() {
+        return aripa;
     }
 
     public String getDenumire() {
