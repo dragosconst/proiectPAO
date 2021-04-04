@@ -1,12 +1,14 @@
 package membri.angajati;
 
+import administrativ.Sectiune;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Bibliotecar extends Angajat{
-    private List<Integer> sectiuni;
+    private List<Sectiune> sectiuni;
     private Date dataNasterii;
 
     public Bibliotecar(String nume, String prenume, String statut, Date dataInscriere, Double salariu) {
@@ -21,23 +23,23 @@ public class Bibliotecar extends Angajat{
         this.dataNasterii = new Date(0);
     }
 
-    public Bibliotecar(String nume, String prenume, String statut, Date dataInscriere, Double salariu, List<Integer> sectiuni, Date dataNasterii) {
+    public Bibliotecar(String nume, String prenume, String statut, Date dataInscriere, Double salariu, List<Sectiune> sectiuni, Date dataNasterii) {
         super(nume, prenume, statut, dataInscriere, salariu);
         this.sectiuni = sectiuni;
         this.dataNasterii = dataNasterii;
     }
 
-    public Bibliotecar(String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission, List<Integer> sectiuni, Date dataNasterii) {
+    public Bibliotecar(String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission, List<Sectiune> sectiuni, Date dataNasterii) {
         super(nume, prenume, statut, dataInscriere, salariu, commission);
         this.sectiuni = sectiuni;
         this.dataNasterii = dataNasterii;
     }
 
-    public List<Integer> getSectiuni() {
+    public List<Sectiune> getSectiuni() {
         return sectiuni;
     }
 
-    public void setSectiuni(List<Integer> sectiuni) {
+    public void setSectiuni(List<Sectiune> sectiuni) {
         this.sectiuni = sectiuni;
     }
 
@@ -52,28 +54,28 @@ public class Bibliotecar extends Angajat{
 
     @Override
     public String toString() {
-        return super.toString() + "Bibliotecar{" +
-                "sectiuni=" + sectiuni +
-                ", dataNasterii=" + dataNasterii +
-                '}';
+        return "Nume: " + this.getNume() + " " + this.getPrenume() +
+                "\nStatut: " + this.getStatut() +
+                "\nSalariu: " + this.getSalariu() +
+                "\nSectiuni: " + this.getSectiuni();
     }
 
-    public void moveToSectiuni(List<Integer> newSec) {
+    public void moveToSectiuni(List<Sectiune> newSec) {
         this.sectiuni = newSec;
     }
 
-    public void addSectiuni(List<Integer> addSec) {
+    public void addSectiuni(List<Sectiune> addSec) {
         this.sectiuni.addAll(addSec);
     }
-    public void addSectiuni(Integer addSec) {
+    public void addSectiuni(Sectiune addSec) {
         this.sectiuni.add(addSec);
     }
 
 
-    public void removeFromSectiuni(List<Integer> rmSec) {
+    public void removeFromSectiuni(List<Sectiune> rmSec) {
         this.sectiuni.removeAll(rmSec);
     }
-    public void removeFromSectiuni(Integer rmSec) {
+    public void removeFromSectiuni(Sectiune rmSec) {
         this.sectiuni.remove(rmSec);
     }
 }

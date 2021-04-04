@@ -11,6 +11,7 @@ import membri.angajati.ITist;
 import service.MainMenu;
 
 import javax.accessibility.AccessibleRole;
+import java.text.ParseException;
 import java.util.*;
 
 public class Main {
@@ -55,7 +56,7 @@ public class Main {
         angajati.add(i2);
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ParseException {
         Scanner sc = new Scanner(System.in);
 
         HashSet<Aripa> aripi = new HashSet<>();

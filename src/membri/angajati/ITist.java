@@ -28,9 +28,10 @@ public class ITist extends Angajat{
 
     @Override
     public String toString() {
-        return super.toString() + "ITist{" +
-                "servere=" + servere +
-                '}';
+        return "Nume: " + this.getNume() + " " + this.getPrenume() +
+                "\nStatut: " + this.getStatut() +
+                "\nSalariu: " + this.getSalariu() +
+                "\nServere la care lucreaza: " + this.getServere();
     }
 
     // ITistii au un boost de salariu separat

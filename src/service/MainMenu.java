@@ -9,7 +9,10 @@ import membri.Autor;
 import membri.Membru;
 import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
+import membri.angajati.ITist;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -40,7 +43,7 @@ public class MainMenu {
         System.out.println("10. Plaseaza o comanda");
     }
 
-    public void handleResponse(int resp){
+    public void handleResponse(int resp) throws ParseException {
         if(resp == 0) return;
         if(resp == 1){
             showAllBooks();
@@ -59,6 +62,9 @@ public class MainMenu {
         }
         else if(resp == 6) {
             addAutor();
+        }
+        else if(resp == 7) {
+            addAngajat();
         }
     }
 
@@ -121,7 +127,7 @@ public class MainMenu {
         for(Angajat a: angajati) {
             System.out.println("-------------------------------");
             System.out.println("Angajat: " + a.getNume() + " " + a.getPrenume());
-            System.out.println("Departament" + (a instanceof Bibliotecar ? "Bibliotecar" : "ITist"));
+            System.out.println("Departament: " + (a instanceof Bibliotecar ? "Bibliotecar" : "ITist"));
             System.out.println("Salariu: " + a.getSalariu());
             System.out.println("Venit total: " + a.totalIncome());
             System.out.println("-------------------------------");
@@ -279,6 +285,70 @@ public class MainMenu {
         }
         else {
             this.addAutor();
+        }
+    }
+
+    private void addAngajat() throws ParseException {
+        Scanner lsc = new Scanner(System.in);
+        System.out.println("Introdu numele angajatului, separat cu spatii albe");
+        String[] name = lsc.nextLine().split("\\s+", 0);
+
+        Date date = new Date(System.currentTimeMillis());
+
+        System.out.println("Introdu salariul angajatului");
+        Double salary = parseInputDouble(lsc);
+
+        System.out.println("Introdu comisionul angajatului");
+        Double comm = parseInputDouble(lsc);
+        lsc.nextLine();
+
+        System.out.println("Anagajatul introdus este un bibliotecar?");
+        String resp = lsc.nextLine();
+        if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+            System.out.println("Introdu data nasterii, pentru bonus-uri");
+            String dateString = lsc.next();
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date nastere = formatter.parse(dateString);
+
+            System.out.println("Selecteaza, dupa id, sectiunile in care lucreaza");
+            List<Integer> possibleIds = new ArrayList<>();
+            for(Sectiune sectiune: this.biblioteca.getSectiuni()) {
+                System.out.println("-------------------------------");
+                System.out.println(sectiune.getDenumire() + ",id=" +sectiune.getSectiuneId() +", genuri: " + sectiune.getGenuri());
+                possibleIds.add(sectiune.getSectiuneId());
+            }
+            List<Sectiune> sectiuni = parseInputSectiuni(lsc, possibleIds);
+
+            Bibliotecar bibliotecar = new Bibliotecar(name[0], String.join("-",Arrays.copyOfRange(name, 1, name.length)),
+                    Membru.getWAITING(), date, salary, sectiuni, nastere);
+            System.out.println("Asta e bibliotecarul pe care voiai sa il adaugi? " + bibliotecar.toString());
+            resp = lsc.nextLine();
+            if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+                HashSet<Angajat> crAng = this.biblioteca.getAngajati();
+                crAng.add(bibliotecar);
+                this.biblioteca.setAngajati(crAng);
+            }
+            else {
+                this.addAngajat();
+            }
+
+        }
+        else {
+            System.out.println("Introdu serverele in care lucreaza, separand prin virgula");
+            String[] servers = lsc.nextLine().split("[,]",0);
+
+            ITist iTist = new ITist(name[0], String.join("-",Arrays.copyOfRange(name, 1, name.length)),
+                    Membru.getWAITING(), date, salary, Arrays.asList(servers));
+            System.out.println("Asta e itistul pe care voiai sa il adaugi? " + iTist.toString());
+            resp = lsc.nextLine();
+            if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+                HashSet<Angajat> crAng = this.biblioteca.getAngajati();
+                crAng.add(iTist);
+                this.biblioteca.setAngajati(crAng);
+            }
+            else {
+                this.addAngajat();
+            }
         }
     }
 }
