@@ -6,9 +6,11 @@ import biblioteca.Biblioteca;
 import carte.Carte;
 import com.sun.source.tree.Tree;
 import membri.Autor;
+import membri.Membru;
 import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainMenu {
@@ -54,6 +56,9 @@ public class MainMenu {
         }
         else if(resp == 5) {
             addBook();
+        }
+        else if(resp == 6) {
+            addAutor();
         }
     }
 
@@ -252,6 +257,28 @@ public class MainMenu {
         else {
             this.addBook();
         }
+    }
 
+    private void addAutor() {
+        Scanner lsc = new Scanner(System.in);
+        System.out.println("Introdu numele autorului, separat cu spatii albe");
+        String[] name = lsc.nextLine().split("\\s+", 0);
+
+        Date date = new Date(System.currentTimeMillis());
+
+        System.out.println("Introdu o scurta descriere a autorului");
+        String desc = lsc.nextLine();
+
+        Autor autor = new Autor(name[0], String.join("-",Arrays.copyOfRange(name, 1, name.length)), Membru.getWAITING(), date, 0.0, 0.0, desc);
+        System.out.println("Acesta este autorul dorit? " + autor.toString());
+        String resp = lsc.nextLine();
+        if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+            TreeSet<Autor> crAutori = this.biblioteca.getAutori();
+            crAutori.add(autor);
+            this.biblioteca.setAutori(crAutori);
+        }
+        else {
+            this.addAutor();
+        }
     }
 }

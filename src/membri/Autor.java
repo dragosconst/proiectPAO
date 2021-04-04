@@ -40,6 +40,7 @@ public class Autor extends Membru implements Comparable<Autor>{
         this.descriere = other.getDescriere();
     }
 
+
     public String getDescriere() {
         return descriere;
     }
@@ -74,11 +75,10 @@ public class Autor extends Membru implements Comparable<Autor>{
 
     @Override
     public String toString() {
-        return "Autor{" +
-                "popularitate=" + popularitate +
-                ", discount=" + discount +
-                ", descriere='" + descriere + '\'' +
-                '}';
+        return "Nume: " + this.getNume() + " " + this.getPrenume() +
+                "\nStatut: " + this.getStatut() +
+                "\nDescriere: " + this.getDescriere() +
+                "\nPopularitate: " + this.getPopularitate();
     }
 
 
