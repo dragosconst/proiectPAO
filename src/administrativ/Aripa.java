@@ -49,4 +49,9 @@ public class Aripa {
     public int hashCode() {
         return Objects.hash(aripaId);
     }
+
+    @Override
+    public String toString() {
+        return "Aripa " + this.getDenumire();
+    }
 }

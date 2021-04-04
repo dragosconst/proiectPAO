@@ -69,7 +69,8 @@ public class Sectiune {
 
     @Override
     public String toString() {
-        return this.denumire;
+        return this.denumire +
+                "\nGenuri" + this.genuri;
     }
 
 

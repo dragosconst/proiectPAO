@@ -100,6 +100,14 @@ public class Biblioteca {
         return null;
     }
 
+    public Aripa findAripa(int aripaId) {
+        for(Aripa a: this.aripi) {
+            if(a.getAripaId() == aripaId)
+                return a;
+        }
+        return null;
+    }
+
     public void addAripi(Aripa aripa){
         this.aripi.add(aripa);
     }

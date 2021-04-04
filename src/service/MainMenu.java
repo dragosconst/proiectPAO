@@ -11,6 +11,7 @@ import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
 import membri.angajati.ITist;
 
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,6 +66,12 @@ public class MainMenu {
         }
         else if(resp == 7) {
             addAngajat();
+        }
+        else if(resp == 8) {
+            addSectiune();
+        }
+        else if(resp == 9) {
+            addAripa();
         }
     }
 
@@ -349,6 +356,58 @@ public class MainMenu {
             else {
                 this.addAngajat();
             }
+        }
+    }
+
+    private void addSectiune() {
+        Scanner lsc = new Scanner(System.in);
+
+        System.out.println("In ce aripa vrei sa adaugi sectiunea? introdu id-ul");
+        List<Integer> possibleIds = new ArrayList<>();
+        for(Aripa aripa: this.biblioteca.getAripi()){
+            System.out.println("-------------------------------");
+            System.out.println("Aripa " + aripa.getDenumire() + ", id: " + aripa.getAripaId());
+            possibleIds.add(aripa.getAripaId());
+        }
+        Integer aripaId = parseInput(lsc, possibleIds);
+        lsc.nextLine();
+        Aripa aripa = this.biblioteca.findAripa(aripaId);
+
+        System.out.println("Introdu denumirea sectiunii");
+        String name = lsc.nextLine();
+
+        System.out.println("Introdu genurile, separate prin virgula");
+        String[] gens = lsc.nextLine().split("[,]", 0);
+
+        Sectiune sectiune = new Sectiune(aripa, name, Arrays.asList(gens), 0.0);
+        System.out.println("Asta e sectiunea pe care o vrei? " + sectiune);
+        String resp = lsc.nextLine();
+        if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+            HashSet<Sectiune> crSec = this.biblioteca.getSectiuni();
+            crSec.add(sectiune);
+            this.biblioteca.setSectiuni(crSec);
+        }
+        else {
+            this.addSectiune();
+        }
+    }
+
+    private void addAripa() {
+        Scanner lsc = new Scanner(System.in);
+
+        System.out.println("Introduce denumirea aripii pe care vrei sa o adaugi");
+        String name = lsc.nextLine();
+
+        Aripa aripa = new Aripa(name, 0.0);
+        System.out.println("Asta e aripa pe care vrei sa o inserezi? " + aripa.toString());
+        String resp = lsc.nextLine();
+        if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+            HashSet<Aripa> crAripa = this.biblioteca.getAripi();
+            crAripa.add(aripa);
+            this.biblioteca.setAripi(crAripa);
+        }
+        else {
+            this.addSectiune();
         }
     }
 }
