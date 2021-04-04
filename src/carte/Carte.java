@@ -121,7 +121,8 @@ public class Carte implements Comparable<Carte>{
 
     @Override
     public String toString() {
-        return "Titlu: " + this.denumire + "\nAutor: " + this.getAutor().getNume() + " " + this.getAutor().getPrenume() +
+        return "Id:" + this.getCarteId() +
+                "\nTitlu: " + this.denumire + "\nAutor: " + this.getAutor().getNume() + " " + this.getAutor().getPrenume() +
                 "\nGenuri: " + this.getGenuri() + "\nSectiuni: " + this.getSectiuni() + "\nPret: " + this.getPret() +
                 "\nNr exemplare: " + this.getNrExemplare();
     }

@@ -73,9 +73,15 @@ public class MainMenu {
         else if(resp == 9) {
             addAripa();
         }
+        else if(resp == 10) {
+            orderStuff();
+        }
+        else {
+            System.out.println("Ai introdus o comanda care nu exista");
+        }
     }
 
-    public void showAllBooks() {
+    private void showAllBooks() {
         TreeSet<Carte> carti = this.biblioteca.getCarti();
         for(Carte it: carti){
             System.out.println("-------------------------------");
@@ -409,5 +415,45 @@ public class MainMenu {
         else {
             this.addSectiune();
         }
+    }
+
+    private void orderStuff() {
+        Scanner lsc = new Scanner(System.in);
+        boolean finished = true;
+
+        double fullPrice = 0.0;
+        List<Carte> cartiComandate = new ArrayList<>();
+        do{
+            finished = false;
+            System.out.println("Alege ce carte vrei sa comanzi, introducand id-ul");
+            for(Carte c: this.biblioteca.getCarti()) {
+                System.out.println(c);
+                System.out.println("-------------------------");
+            }
+
+            List<Integer> possibleIds = new ArrayList<>();
+            for(Carte carte: this.biblioteca.getCarti()) {
+                possibleIds.add(carte.getCarteId());
+            }
+            Integer cId = parseInput(lsc, possibleIds);
+            lsc.nextLine();
+            Carte comanda = this.biblioteca.findCarte(cId);
+
+            fullPrice += this.biblioteca.finalPrice(cId);
+            cartiComandate.add(comanda);
+            System.out.println("Comanda ta pana acum este:");
+            for(Carte c: cartiComandate) {
+                System.out.println("-------------------------");
+                System.out.println(c);
+                System.out.println("-------------------------");
+            }
+            System.out.println("Pret total: " + fullPrice);
+            System.out.println("Mai vrei sa comanzi ceva?");
+            String resp = lsc.nextLine();
+
+            if(!resp.toLowerCase(Locale.ROOT).contains("da")) {
+                finished = true;
+            }
+        }while(!finished);
     }
 }

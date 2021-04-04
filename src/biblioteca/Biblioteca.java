@@ -108,6 +108,14 @@ public class Biblioteca {
         return null;
     }
 
+    public Carte findCarte(int carteId) {
+        for(Carte c: this.carti) {
+            if(c.getCarteId() == carteId)
+                return c;
+        }
+        return null;
+    }
+
     public void addAripi(Aripa aripa){
         this.aripi.add(aripa);
     }
