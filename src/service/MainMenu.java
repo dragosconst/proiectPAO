@@ -11,6 +11,7 @@ import membri.Membru;
 import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
 import membri.angajati.ITist;
+import utils.CsvWriter;
 
 import java.sql.SQLOutput;
 import java.text.DateFormat;
@@ -58,6 +59,7 @@ public class MainMenu {
         System.out.println("8. Adauga o sectiune in biblioteca");
         System.out.println("9. Adauga o aripa in biblioteca");
         System.out.println("10. Plaseaza o comanda");
+        System.out.println("11. Genereaza csv cu cartile");
     }
 
     public void handleResponse(int resp) throws ParseException {
@@ -91,6 +93,9 @@ public class MainMenu {
         }
         else if(resp == 10) {
             orderStuff();
+        }
+        else if(resp == 11) {
+            CsvWriter.writeCarti(this.biblioteca);
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");
