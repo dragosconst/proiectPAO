@@ -5,6 +5,7 @@ import administrativ.Sectiune;
 import biblioteca.Biblioteca;
 import carte.Carte;
 import com.sun.source.tree.Tree;
+import com.sun.tools.javac.Main;
 import membri.Autor;
 import membri.Membru;
 import membri.angajati.Angajat;
@@ -19,13 +20,28 @@ import java.util.*;
 
 public class MainMenu {
     private final Biblioteca biblioteca;
+    private static MainMenu instance = null;
 
-    public MainMenu() {
+    private MainMenu() {
         this.biblioteca = new Biblioteca(null, null, null, null, null);
     }
 
-    public MainMenu(Biblioteca biblioteca) {
+    private MainMenu(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
+    }
+
+    public static MainMenu getInstance(Biblioteca biblioteca)
+    {
+        if(instance == null)
+            instance = new MainMenu(biblioteca);
+        return instance;
+    }
+
+    public static MainMenu getInstance()
+    {
+        if(instance == null)
+            instance = new MainMenu();
+        return instance;
     }
 
     public void printMainMenu() {

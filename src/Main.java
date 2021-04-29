@@ -68,7 +68,7 @@ public class Main {
         initValues(aripi, sectiuni, angajati, autori, carti);
 
         Biblioteca biblioteca = new Biblioteca(aripi, sectiuni, angajati, autori, carti);
-        MainMenu menu = new MainMenu(biblioteca);
+        MainMenu menu = MainMenu.getInstance(biblioteca);
         int response = -1;
         while(response != 0) {
             Thread.sleep(1000); // for some flavor
