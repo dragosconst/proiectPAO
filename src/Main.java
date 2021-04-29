@@ -17,9 +17,9 @@ import java.util.*;
 public class Main {
 
     public static void initValues(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti){
-        Autor a1 = new Autor("Asimov", "Isaac", Membru.getACCEPTED(), new Date(2012, 5, 6), "Autor de SF");
-        Autor a2 = new Autor("Liviu", "Rebreanu", Membru.getACCEPTED(), new Date(2012, 5, 6), "Autor de romane");
-        Autor a3 = new Autor("J.R.R.", "Tolkien", Membru.getACCEPTED(), new Date(2012, 5, 6), "Autor de fantasy");
+        Autor a1 = new Autor("Asimov", "Isaac", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.JULY, 6).getTime(), "Autor de SF");
+        Autor a2 = new Autor("Liviu", "Rebreanu", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.FEBRUARY, 6).getTime(), "Autor de romane");
+        Autor a3 = new Autor("J.R.R.", "Tolkien", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.MARCH, 6).getTime(), "Autor de fantasy");
         autori.add(a1);
         autori.add(a2);
         autori.add(a3);
@@ -37,18 +37,18 @@ public class Main {
         sectiuni.add(s3);
 
         Carte c1 = new Carte(a1, Arrays.asList(s1), "Fundatia", Arrays.asList("SF"), 12.0, 0.1, 200);
-        Carte c2 = new Carte(a1, Arrays.asList(s1), "Eu, robotul", Arrays.asList("SF"), 16.0, 0.0, 30);
+        Carte c2 = new Carte(a1, Arrays.asList(s1), "Eu robotul", Arrays.asList("SF"), 16.0, 0.0, 30);
         Carte c3 = new Carte(a2, Arrays.asList(s2), "Ion", Arrays.asList("roman"), 5.0, 0.25, 10);
         Carte c4 = new Carte(a3, Arrays.asList(s3),"Stapanul Inelelor 1", Arrays.asList("fantasy"), 10.0, 0.0, 100);
         Carte c5 = new Carte(a3, Arrays.asList(s3), "Stapanul Inelelor 2", Arrays.asList("fantasy"), 10.0, 0.0, 120);
         Carte c6 = new Carte(a3, Arrays.asList(s3), "Stapanul Inelelor 3", Arrays.asList("fantasy"), 10.0, 0.0, 110);
         carti.addAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
 
-        Angajat b1 = new Bibliotecar("Ion", "Ion", Membru.getACCEPTED(), new Date(2000, 1, 3), 1900.0);
-        Angajat b2 = new Bibliotecar("Mihai", "Andrei", Membru.getACCEPTED(), new Date(2006, 12, 30), 3000.0);
-        Angajat b3 = new Bibliotecar("Alex", "Petre", Membru.getACCEPTED(), new Date(2003, 6, 6), 3100.0);
-        Angajat i1 = new ITist("Dan", "Dan", Membru.getACCEPTED(), new Date(2005, 7, 10), 2000.0, Arrays.asList("server aripa 1"));
-        Angajat i2 = new ITist("Daniel", "Pop", Membru.getACCEPTED(), new Date(2005, 9, 10), 4000.0, Arrays.asList("server aripa 1", "server aripa 2"));
+        Angajat b1 = new Bibliotecar("Ion", "Ion", Membru.getACCEPTED(), new GregorianCalendar(2000, 1, 3).getTime(), 1900.0);
+        Angajat b2 = new Bibliotecar("Mihai", "Andrei", Membru.getACCEPTED(), new GregorianCalendar(2006, 12, 30).getTime(), 3000.0);
+        Angajat b3 = new Bibliotecar("Alex", "Petre", Membru.getACCEPTED(), new GregorianCalendar(2003, 6, 6).getTime(), 3100.0);
+        Angajat i1 = new ITist("Dan", "Dan", Membru.getACCEPTED(), new GregorianCalendar(2005, 7, 10).getTime(), 2000.0, Arrays.asList("server aripa 1"));
+        Angajat i2 = new ITist("Daniel", "Pop", Membru.getACCEPTED(), new GregorianCalendar(2005, 9, 10).getTime(), 4000.0, Arrays.asList("server aripa 1", "server aripa 2"));
         angajati.add(b1);
         angajati.add(b2);
         angajati.add(b3);

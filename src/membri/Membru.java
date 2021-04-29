@@ -25,7 +25,7 @@ public abstract class Membru {
         this.prenume = prenume;
         this.statut = statut;
         this.dataInscriere = dataInscriere;
-        this.statut = WAITING;
+        this.statut = statut;
         this.membruId = membruId;
     }
 

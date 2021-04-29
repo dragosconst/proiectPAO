@@ -11,6 +11,7 @@ import membri.Membru;
 import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
 import membri.angajati.ITist;
+import utils.CsvReader;
 import utils.CsvWriter;
 
 import java.sql.SQLOutput;
@@ -95,7 +96,10 @@ public class MainMenu {
             orderStuff();
         }
         else if(resp == 11) {
-            CsvWriter.writeCarti(this.biblioteca);
+            CsvWriter.writeAngajati(this.biblioteca);
+        }
+        else if(resp == 12){
+            CsvReader.readAngajati(this.biblioteca);
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");
