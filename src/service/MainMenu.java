@@ -80,18 +80,23 @@ public class MainMenu {
         }
         else if(resp == 5) {
             addBook();
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 6) {
             addAutor();
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 7) {
             addAngajat();
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 8) {
             addSectiune();
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 9) {
             addAripa();
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 10) {
             orderStuff();
@@ -359,7 +364,7 @@ public class MainMenu {
             List<Sectiune> sectiuni = parseInputSectiuni(lsc, possibleIds);
 
             Bibliotecar bibliotecar = new Bibliotecar(name[0], String.join("-",Arrays.copyOfRange(name, 1, name.length)),
-                    Membru.getWAITING(), date, salary, sectiuni, nastere);
+                    Membru.getWAITING(), date, salary, comm, sectiuni, nastere);
             System.out.println("Asta e bibliotecarul pe care voiai sa il adaugi? " + bibliotecar.toString());
             resp = lsc.nextLine();
             if(resp.toLowerCase(Locale.ROOT).contains("da")) {
@@ -377,7 +382,7 @@ public class MainMenu {
             String[] servers = lsc.nextLine().split("[,]",0);
 
             ITist iTist = new ITist(name[0], String.join("-",Arrays.copyOfRange(name, 1, name.length)),
-                    Membru.getWAITING(), date, salary, Arrays.asList(servers));
+                    Membru.getWAITING(), date, salary, comm, Arrays.asList(servers));
             System.out.println("Asta e itistul pe care voiai sa il adaugi? " + iTist.toString());
             resp = lsc.nextLine();
             if(resp.toLowerCase(Locale.ROOT).contains("da")) {
