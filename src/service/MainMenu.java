@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainMenu {
-    private final Biblioteca biblioteca;
+    private Biblioteca biblioteca;
     private static MainMenu instance = null;
 
     private MainMenu() {
@@ -60,7 +60,8 @@ public class MainMenu {
         System.out.println("8. Adauga o sectiune in biblioteca");
         System.out.println("9. Adauga o aripa in biblioteca");
         System.out.println("10. Plaseaza o comanda");
-        System.out.println("11. Genereaza csv cu cartile");
+        System.out.println("11. Genereaza csv cu toata biblioteca");
+        System.out.println("12. Incarca biblioteca salvata");
     }
 
     public void handleResponse(int resp) throws ParseException {
@@ -99,7 +100,7 @@ public class MainMenu {
             CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 12){
-            CsvReader.readBiblioteca();
+            this.biblioteca = CsvReader.readBiblioteca();
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");
@@ -343,7 +344,7 @@ public class MainMenu {
         System.out.println("Anagajatul introdus este un bibliotecar?");
         String resp = lsc.nextLine();
         if(resp.toLowerCase(Locale.ROOT).contains("da")) {
-            System.out.println("Introdu data nasterii, pentru bonus-uri");
+            System.out.println("Introdu data nasterii, pentru bonus-uri, in format dd-MM-yyyy");
             String dateString = lsc.next();
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date nastere = formatter.parse(dateString);
