@@ -17,8 +17,22 @@ public abstract class Angajat extends Membru {
         lastMembruId += 1;
     }
 
+    public Angajat(Integer id, String nume, String prenume, String statut, Date dataInscriere, Double salariu) {
+        super(nume, prenume, statut, dataInscriere, id);
+        this.salariu = salariu;
+        this.commission = 0.0;
+        lastMembruId += 1;
+    }
+
     public Angajat(String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission) {
         super(nume, prenume, statut, dataInscriere, lastMembruId + 1);
+        this.salariu = salariu;
+        this.commission = commission;
+        lastMembruId += 1;
+    }
+
+    public Angajat(Integer id, String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission) {
+        super(nume, prenume, statut, dataInscriere, id);
         this.salariu = salariu;
         this.commission = commission;
         lastMembruId += 1;

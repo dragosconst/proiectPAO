@@ -22,6 +22,15 @@ public class Sectiune {
         this.discount = discount;
     }
 
+    // for csvs
+    public Sectiune(Integer id, Aripa aripa, String denumire, List<String> genuri, Double discount) {
+        this.sectiuneId = id;
+        this.aripa = aripa;
+        this.denumire = denumire;
+        this.genuri = genuri;
+        this.discount = discount;
+    }
+
     public int getSectiuneId() {
         return sectiuneId;
     }

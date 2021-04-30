@@ -96,10 +96,10 @@ public class MainMenu {
             orderStuff();
         }
         else if(resp == 11) {
-            CsvWriter.writeAngajati(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca);
         }
         else if(resp == 12){
-            CsvReader.readAngajati(this.biblioteca);
+            CsvReader.readBiblioteca();
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");

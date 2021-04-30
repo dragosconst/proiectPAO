@@ -18,10 +18,11 @@ public class CsvWriter {
             StringBuilder stringBuilder = new StringBuilder();
 
             // csv header
-            reportRecord(stringBuilder, "autor", "sectiuni", "titlu", "gen", "pret", "discount", "nrExemplare");
+            reportRecord(stringBuilder, "carteId", "autor", "sectiuni", "titlu", "gen", "pret", "discount", "nrExemplare");
 
             biblioteca.getCarti().forEach(carte -> {
-                reportRecord(stringBuilder, carte.getAutor().getMembruId().toString(),
+                reportRecord(stringBuilder, Integer.toString(carte.getCarteId()),
+                        carte.getAutor().getMembruId().toString(),
                         String.join(";", carte.getSectiuni().stream().map(Sectiune::getSectiuneId).collect(Collectors.toList()).toString()),
                         carte.getDenumire(),
                         String.join(";",carte.getGenuri()),
@@ -44,10 +45,11 @@ public class CsvWriter {
             StringBuilder stringBuilder = new StringBuilder();
 
             // csv header
-            reportRecord(stringBuilder, "nume", "prenume", "statut", "dataInscriere", "popularitate", "discount", "descriere");
+            reportRecord(stringBuilder, "autorId", "nume", "prenume", "statut", "dataInscriere", "popularitate", "discount", "descriere");
 
             biblioteca.getAutori().forEach(autor -> {
-                reportRecord(stringBuilder, autor.getNume(),
+                reportRecord(stringBuilder, autor.getMembruId().toString(),
+                        autor.getNume(),
                         autor.getPrenume(),
                         autor.getStatut(),
                         new SimpleDateFormat("dd/MM/yyyy").format(autor.getDataInscriere()),
@@ -70,10 +72,11 @@ public class CsvWriter {
             StringBuilder stringBuilder = new StringBuilder();
 
             // csv header
-            reportRecord(stringBuilder, "nume", "prenume", "statut", "dataInscriere", "salariu", "comision", "tip", "servere", "sectiuni", "dataNasterii");
+            reportRecord(stringBuilder, "angajatId", "nume", "prenume", "statut", "dataInscriere", "salariu", "comision", "tip", "servere", "sectiuni", "dataNasterii");
 
             biblioteca.getAngajati().forEach(angajat -> {
-                reportRecord(stringBuilder, angajat.getNume(),
+                reportRecord(stringBuilder, angajat.getMembruId().toString(),
+                        angajat.getNume(),
                         angajat.getPrenume(),
                         angajat.getStatut(),
                         new SimpleDateFormat("dd/MM/yyyy").format(angajat.getDataInscriere()),
@@ -94,6 +97,63 @@ public class CsvWriter {
         {
             ex.printStackTrace();
         }
+    }
+
+    public static void writeAripi(Biblioteca biblioteca) {
+        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\aripi.csv";
+        try(PrintWriter printWriter = new PrintWriter(filePath)) {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            // csv header
+            reportRecord(stringBuilder, "aripaid", "denumire", "discount");
+
+            biblioteca.getAripi().forEach(aripa -> {
+                reportRecord(stringBuilder, Integer.toString(aripa.getAripaId()),
+                        aripa.getDenumire(),
+                        Double.toString(aripa.getDiscount())
+                        );
+            });
+
+            printWriter.write(stringBuilder.toString());
+            System.out.println("csv generated!");
+        }catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void writeSectiuni(Biblioteca biblioteca) {
+        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\sectiuni.csv";
+        try(PrintWriter printWriter = new PrintWriter(filePath)) {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            // csv header
+            reportRecord(stringBuilder, "sectiuneid", "aripaid", "denumire", "genuri", "discount");
+
+            biblioteca.getSectiuni().forEach(sectiune -> {
+                reportRecord(stringBuilder, Integer.toString(sectiune.getSectiuneId()),
+                        Integer.toString(sectiune.getAripa().getAripaId()),
+                        sectiune.getDenumire(),
+                        String.join(";", sectiune.getGenuri()),
+                        sectiune.getDiscount().toString()
+                );
+            });
+
+            printWriter.write(stringBuilder.toString());
+            System.out.println("csv generated!");
+        }catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    // wrapper function that calls all the other write functions
+    public static void writeBiblioteca(Biblioteca biblioteca) {
+        writeAripi(biblioteca);
+        writeSectiuni(biblioteca);
+        writeAutori(biblioteca);
+        writeAngajati(biblioteca);
+        writeCarti(biblioteca);
     }
 
     public static StringBuilder reportRecord(StringBuilder sb, String... parameters) {

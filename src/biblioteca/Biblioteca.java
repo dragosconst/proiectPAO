@@ -19,6 +19,17 @@ public class Biblioteca {
     private TreeSet<Carte>  carti;
     private TreeMap<String, Carte> cartiDenumiri;
 
+    public Biblioteca() {
+        this.bibliotecaId = lastBibliotecaId + 1;
+        lastBibliotecaId += 1;
+        this.aripi = null;
+        this.sectiuni = null;
+        this.angajati = null;
+        this.autori = null;
+        this.carti = null;
+        this.cartiDenumiri = new TreeMap<>();
+    }
+
     public Biblioteca(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti) {
         this.bibliotecaId = lastBibliotecaId + 1;
         lastBibliotecaId += 1;
@@ -57,6 +68,7 @@ public class Biblioteca {
 
     public void setCarti(TreeSet<Carte> carti) {
         this.carti = carti;
+        this.generateTreeSet();
     }
 
     public HashSet<Sectiune> getSectiuni() {
@@ -183,6 +195,7 @@ public class Biblioteca {
     }
 
     private void generateTreeSet() {
+        this.cartiDenumiri = new TreeMap<>(); // delete previous result
         for(Carte it: this.carti){
             this.cartiDenumiri.put(it.getDenumire(), it);
         }

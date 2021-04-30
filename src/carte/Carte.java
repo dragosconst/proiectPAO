@@ -30,6 +30,17 @@ public class Carte implements Comparable<Carte>{
         this.nrExemplare = nrExemplare;
     }
 
+    public Carte(Integer id, Autor autor, List<Sectiune> sectiuni, String denumire, List<String> genuri, Double pret, Double discount, int nrExemplare) {
+        this.carteId = id;
+        this.autor = autor;
+        this.sectiuni = sectiuni;
+        this.denumire = denumire;
+        this.genuri = genuri;
+        this.pret = pret;
+        this.discount = discount;
+        this.nrExemplare = nrExemplare;
+    }
+
     public Carte(Carte other){
         this.carteId = other.carteId;
         this.autor = other.autor;

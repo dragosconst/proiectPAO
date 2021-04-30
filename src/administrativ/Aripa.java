@@ -16,6 +16,13 @@ public class Aripa {
         this.discount = discount;
     }
 
+    // for reading from csvs
+    public Aripa(Integer id, String denumire, double discount) {
+        this.aripaId = id;
+        this.denumire = denumire;
+        this.discount = discount;
+    }
+
     public int getAripaId() {
         return aripaId;
     }

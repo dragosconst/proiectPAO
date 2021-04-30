@@ -24,6 +24,15 @@ public class Autor extends Membru implements Comparable<Autor>{
         this.descriere = descriere;
         lastMembruId += 1;
     }
+    public Autor(Integer id, String nume, String prenume, String statut, Date dataInscriere, String descriere)
+    {
+        super(nume, prenume, statut, dataInscriere, id);
+        this.popularitate = 0.0;
+        this.discount = 0.0;
+        this.descriere = descriere;
+        lastMembruId += 1;
+    }
+
 
     public Autor(String nume, String prenume, String statut, Date dataInscriere, Double popularitate, Double discount, String descriere) {
         super(nume, prenume, statut, dataInscriere, lastMembruId + 1);
@@ -32,6 +41,15 @@ public class Autor extends Membru implements Comparable<Autor>{
         this.descriere = descriere;
         lastMembruId += 1;
     }
+
+    public Autor(Integer id, String nume, String prenume, String statut, Date dataInscriere, Double popularitate, Double discount, String descriere) {
+        super(nume, prenume, statut, dataInscriere, id);
+        this.popularitate = popularitate;
+        this.discount = discount;
+        this.descriere = descriere;
+        lastMembruId += 1;
+    }
+
     public Autor(Autor other){
         super(other.getNume(), other.getPrenume(), other.getStatut(), other.getDataInscriere(), other.getMembruId());
         this.popularitate = other.getPopularitate();
