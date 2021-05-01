@@ -8,12 +8,20 @@ import membri.angajati.ITist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CsvWriter {
-    public static void writeCarti(Biblioteca biblioteca) {
-        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\carti.csv";
+    public static void writeCarti(Biblioteca biblioteca, boolean stamped) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath;
+        if(stamped){
+            filePath = CsvUtils.folderPath + CsvUtils.carti + timestamp + CsvUtils.fileExtension;
+        }
+        else {
+            filePath = CsvUtils.folderPath + CsvUtils.carti + CsvUtils.fileExtension;
+        }
         try(PrintWriter printWriter = new PrintWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -39,8 +47,15 @@ public class CsvWriter {
         }
     }
 
-    public static void writeAutori(Biblioteca biblioteca) {
-        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\autori.csv";
+    public static void writeAutori(Biblioteca biblioteca, boolean stamped) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath;
+        if(stamped){
+            filePath = CsvUtils.folderPath + CsvUtils.autori + timestamp + CsvUtils.fileExtension;
+        }
+        else {
+            filePath = CsvUtils.folderPath + CsvUtils.autori + CsvUtils.fileExtension;
+        }
         try(PrintWriter printWriter = new PrintWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -66,8 +81,15 @@ public class CsvWriter {
         }
     }
 
-    public static void writeAngajati(Biblioteca biblioteca) {
-        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\angajati.csv";
+    public static void writeAngajati(Biblioteca biblioteca, boolean stamped) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath;
+        if(stamped){
+            filePath = CsvUtils.folderPath + CsvUtils.angajati + timestamp + CsvUtils.fileExtension;
+        }
+        else {
+            filePath = CsvUtils.folderPath + CsvUtils.angajati + CsvUtils.fileExtension;
+        }
         try(PrintWriter printWriter = new PrintWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -99,8 +121,15 @@ public class CsvWriter {
         }
     }
 
-    public static void writeAripi(Biblioteca biblioteca) {
-        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\aripi.csv";
+    public static void writeAripi(Biblioteca biblioteca, boolean stamped) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath;
+        if(stamped){
+            filePath = CsvUtils.folderPath + CsvUtils.aripi + timestamp + CsvUtils.fileExtension;
+        }
+        else {
+            filePath = CsvUtils.folderPath + CsvUtils.aripi + CsvUtils.fileExtension;
+        }
         try(PrintWriter printWriter = new PrintWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -122,8 +151,15 @@ public class CsvWriter {
         }
     }
 
-    public static void writeSectiuni(Biblioteca biblioteca) {
-        String filePath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\sectiuni.csv";
+    public static void writeSectiuni(Biblioteca biblioteca, boolean stamped) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath;
+        if(stamped){
+            filePath = CsvUtils.folderPath + CsvUtils.sectiuni + timestamp + CsvUtils.fileExtension;
+        }
+        else {
+            filePath = CsvUtils.folderPath + CsvUtils.sectiuni + CsvUtils.fileExtension;
+        }
         try(PrintWriter printWriter = new PrintWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -148,12 +184,12 @@ public class CsvWriter {
     }
 
     // wrapper function that calls all the other write functions
-    public static void writeBiblioteca(Biblioteca biblioteca) {
-        writeAripi(biblioteca);
-        writeSectiuni(biblioteca);
-        writeAutori(biblioteca);
-        writeAngajati(biblioteca);
-        writeCarti(biblioteca);
+    public static void writeBiblioteca(Biblioteca biblioteca, boolean stamped) {
+        writeAripi(biblioteca, stamped);
+        writeSectiuni(biblioteca, stamped);
+        writeAutori(biblioteca, stamped);
+        writeAngajati(biblioteca, stamped);
+        writeCarti(biblioteca, stamped);
     }
 
     public static StringBuilder reportRecord(StringBuilder sb, String... parameters) {

@@ -56,7 +56,7 @@ public class Main {
         angajati.add(i2);
     }
 
-    public static void main(String[] args) throws InterruptedException, ParseException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         HashSet<Aripa> aripi = new HashSet<>();
@@ -71,10 +71,18 @@ public class Main {
         MainMenu menu = MainMenu.getInstance(biblioteca);
         int response = -1;
         while(response != 0) {
-            Thread.sleep(1000); // for some flavor
+            try {
+                Thread.sleep(1000); // for some flavor
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             menu.printMainMenu();
             response = sc.nextInt();
-            menu.handleResponse(response);
+            try {
+                menu.handleResponse(response);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

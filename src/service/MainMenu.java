@@ -80,29 +80,29 @@ public class MainMenu {
         }
         else if(resp == 5) {
             addBook();
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, true);
         }
         else if(resp == 6) {
             addAutor();
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, true);
         }
         else if(resp == 7) {
             addAngajat();
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, true);
         }
         else if(resp == 8) {
             addSectiune();
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, true);
         }
         else if(resp == 9) {
             addAripa();
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, true);
         }
         else if(resp == 10) {
             orderStuff();
         }
         else if(resp == 11) {
-            CsvWriter.writeBiblioteca(this.biblioteca);
+            CsvWriter.writeBiblioteca(this.biblioteca, false);
         }
         else if(resp == 12){
             this.biblioteca = CsvReader.readBiblioteca();
