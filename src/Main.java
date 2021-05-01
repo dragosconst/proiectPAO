@@ -78,11 +78,7 @@ public class Main {
             }
             menu.printMainMenu();
             response = sc.nextInt();
-            try {
-                menu.handleResponse(response);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            menu.handleResponse(response);
         }
     }
 }

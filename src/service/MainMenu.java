@@ -64,7 +64,7 @@ public class MainMenu {
         System.out.println("12. Incarca biblioteca salvata");
     }
 
-    public void handleResponse(int resp) throws ParseException {
+    public void handleResponse(int resp) {
         if(resp == 0) return;
         if(resp == 1){
             showAllBooks();
@@ -332,7 +332,7 @@ public class MainMenu {
         }
     }
 
-    private void addAngajat() throws ParseException {
+    private void addAngajat() {
         Scanner lsc = new Scanner(System.in);
         System.out.println("Introdu numele angajatului, separat cu spatii albe");
         String[] name = lsc.nextLine().split("\\s+", 0);
@@ -352,7 +352,13 @@ public class MainMenu {
             System.out.println("Introdu data nasterii, pentru bonus-uri, in format dd-MM-yyyy");
             String dateString = lsc.next();
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            Date nastere = formatter.parse(dateString);
+            Date nastere = null;
+            try {
+                nastere = formatter.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return;
+            }
 
             System.out.println("Selecteaza, dupa id, sectiunile in care lucreaza");
             List<Integer> possibleIds = new ArrayList<>();
