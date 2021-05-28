@@ -11,6 +11,7 @@ import membri.Membru;
 import membri.angajati.Angajat;
 import membri.angajati.Bibliotecar;
 import membri.angajati.ITist;
+import repo.impl.BiblRepoImpl;
 import utils.CsvReader;
 import utils.CsvWriter;
 
@@ -19,6 +20,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainMenu {
     private Biblioteca biblioteca;
@@ -62,6 +65,7 @@ public class MainMenu {
         System.out.println("10. Plaseaza o comanda");
         System.out.println("11. Genereaza csv cu toata biblioteca");
         System.out.println("12. Incarca biblioteca salvata");
+        System.out.println("13. Incarca biblioteca din baza de date");
     }
 
     public void handleResponse(int resp) {
@@ -106,6 +110,9 @@ public class MainMenu {
         }
         else if(resp == 12){
             this.biblioteca = CsvReader.readBiblioteca();
+        }
+        else if(resp == 13) {
+            this.biblioteca = this.loadFromDb();
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");
@@ -302,6 +309,8 @@ public class MainMenu {
         if(resp.toLowerCase(Locale.ROOT).contains("da")) {
             TreeSet<Carte> crCarti = this.biblioteca.getCarti();
             crCarti.add(newCarte);
+            BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+            dbInstance.addCarte(newCarte);
             this.biblioteca.setCarti(crCarti);
         }
         else {
@@ -325,6 +334,8 @@ public class MainMenu {
         if(resp.toLowerCase(Locale.ROOT).contains("da")) {
             TreeSet<Autor> crAutori = this.biblioteca.getAutori();
             crAutori.add(autor);
+            BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+            dbInstance.addAutor(autor);
             this.biblioteca.setAutori(crAutori);
         }
         else {
@@ -376,6 +387,8 @@ public class MainMenu {
             if(resp.toLowerCase(Locale.ROOT).contains("da")) {
                 HashSet<Angajat> crAng = this.biblioteca.getAngajati();
                 crAng.add(bibliotecar);
+                BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+                dbInstance.addBibliotecar(bibliotecar);
                 this.biblioteca.setAngajati(crAng);
             }
             else {
@@ -394,6 +407,8 @@ public class MainMenu {
             if(resp.toLowerCase(Locale.ROOT).contains("da")) {
                 HashSet<Angajat> crAng = this.biblioteca.getAngajati();
                 crAng.add(iTist);
+                BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+                dbInstance.addItist(iTist);
                 this.biblioteca.setAngajati(crAng);
             }
             else {
@@ -428,6 +443,8 @@ public class MainMenu {
         if(resp.toLowerCase(Locale.ROOT).contains("da")) {
             HashSet<Sectiune> crSec = this.biblioteca.getSectiuni();
             crSec.add(sectiune);
+            BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+            dbInstance.addSectiune(sectiune);
             this.biblioteca.setSectiuni(crSec);
         }
         else {
@@ -447,6 +464,8 @@ public class MainMenu {
         if(resp.toLowerCase(Locale.ROOT).contains("da")) {
             HashSet<Aripa> crAripa = this.biblioteca.getAripi();
             crAripa.add(aripa);
+            BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+            dbInstance.addAripa(aripa);
             this.biblioteca.setAripi(crAripa);
         }
         else {
@@ -492,5 +511,22 @@ public class MainMenu {
                 finished = true;
             }
         }while(!finished);
+    }
+
+    private Biblioteca loadFromDb() {
+        BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+        HashSet<Aripa> aripi = dbInstance.getAripi();
+        HashSet<Sectiune> sectiuni = dbInstance.getSectiuni();
+        TreeSet<Autor> autori = dbInstance.getAutori();
+        TreeSet<Carte> carti = dbInstance.getCarti();
+        HashSet<Bibliotecar> bibliotecari = dbInstance.getBibilotecari();
+        HashSet<ITist> iTisti = dbInstance.getITisti();
+
+        Set<Angajat> angajati_set = Stream.concat(bibliotecari.stream(), iTisti.stream()).collect(Collectors.toSet());
+        HashSet<Angajat> angajati = (HashSet<Angajat>) angajati_set;
+
+        //  public Biblioteca(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti) {
+        //
+        return new Biblioteca(aripi, sectiuni, angajati, autori, carti);
     }
 }

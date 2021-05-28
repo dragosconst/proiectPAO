@@ -35,6 +35,12 @@ public class Bibliotecar extends Angajat{
         this.dataNasterii = dataNasterii;
     }
 
+    public Bibliotecar(Integer id, String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission, List<Sectiune> sectiuni, Date dataNasterii) {
+        super(id, nume, prenume, statut, dataInscriere, salariu, commission);
+        this.sectiuni = sectiuni;
+        this.dataNasterii = dataNasterii;
+    }
+
     public List<Sectiune> getSectiuni() {
         return sectiuni;
     }

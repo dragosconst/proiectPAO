@@ -18,6 +18,11 @@ public class ITist extends Angajat{
         this.servere = servere;
     }
 
+    public ITist(Integer id, String nume, String prenume, String statut, Date dataInscriere, Double salariu, Double commission, List<String> servere) {
+        super(id, nume, prenume, statut, dataInscriere, salariu, commission);
+        this.servere = servere;
+    }
+
     public List<String> getServere() {
         return servere;
     }

@@ -1,6 +1,6 @@
 package utils;
 
-class CsvUtils {
+interface CsvUtils {
     public static final String folderPath = "C:\\Users\\Dragos\\IdeaProjects\\proiectPAO\\csv\\";
     public static final String fileExtension = ".csv";
     public static final String carti = "carti";

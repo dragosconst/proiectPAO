@@ -18,8 +18,8 @@ public class Main {
 
     public static void initValues(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti){
         Autor a1 = new Autor("Asimov", "Isaac", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.JULY, 6).getTime(), "Autor de SF");
-        Autor a2 = new Autor("Liviu", "Rebreanu", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.FEBRUARY, 6).getTime(), "Autor de romane");
-        Autor a3 = new Autor("J.R.R.", "Tolkien", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.MARCH, 6).getTime(), "Autor de fantasy");
+        Autor a2 = new Autor("Rebereanu", "Liviu", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.FEBRUARY, 6).getTime(), "Autor de romane");
+        Autor a3 = new Autor("Tolkien", "J.R.R.", Membru.getACCEPTED(), new GregorianCalendar(2012, Calendar.MARCH, 6).getTime(), "Autor de fantasy");
         autori.add(a1);
         autori.add(a2);
         autori.add(a3);
