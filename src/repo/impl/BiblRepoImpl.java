@@ -3,6 +3,7 @@ package repo.impl;
 import administrativ.Aripa;
 import administrativ.Sectiune;
 import carte.Carte;
+import com.mysql.cj.interceptors.QueryInterceptor;
 import com.mysql.cj.protocol.Resultset;
 import db.DbConnection;
 import db.Queries;
@@ -91,8 +92,6 @@ public class BiblRepoImpl implements BiblRepo {
             while(resultSet.next()) {
                 //    public Sectiune(Integer id, Aripa aripa, String denumire, List<String> genuri, Double discount) {
                 int aripaId = resultSet.getInt("aripaId");
-                System.out.println(aripaId);
-                System.out.println(aripiDinDb);
                 Aripa aripa = aripiDinDb.stream().filter(a -> a.getAripaId() == aripaId).findFirst().get();
                 Sectiune sectiune = new Sectiune(resultSet.getInt("sectiuneId"), aripa,
                                 resultSet.getString("denumire"), Arrays.asList(resultSet.getString("genuri").split("[,]", 0)),
@@ -116,10 +115,8 @@ public class BiblRepoImpl implements BiblRepo {
                 //    public Aripa(Integer id, String denumire, double discount)
                 Aripa aripa = new Aripa(resultSet.getInt("aripaId"), resultSet.getString("denumire"),
                                         resultSet.getDouble("discount"));
-                System.out.println("brrruuuhh");
                 aripi.add(aripa);
             }
-            System.out.println("finish");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -358,6 +355,112 @@ public class BiblRepoImpl implements BiblRepo {
         }catch (SQLException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    @Override
+    public void updateAripa(Aripa aripa) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.UPDATE_ARIPA);
+            preparedStatement.setString(1, aripa.getDenumire());
+            preparedStatement.setDouble(2, aripa.getDiscount());
+            preparedStatement.setInt(3, aripa.getAripaId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateSectiune(Sectiune sectiune) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.UPDATE_SECTIUNE);
+            preparedStatement.setString(1, sectiune.getDenumire());
+            preparedStatement.setString(2, sectiune.getGenuri().toString());
+            preparedStatement.setDouble(3, sectiune.getDiscount());
+            preparedStatement.setInt(4, sectiune.getSectiuneId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateItist(ITist iTist) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.UPDATE_ITIST);
+            preparedStatement.setString(1, iTist.getNume());
+            preparedStatement.setString(2, iTist.getPrenume());
+            preparedStatement.setString(3, iTist.getStatut());
+            preparedStatement.setDate(4, new java.sql.Date(iTist.getDataInscriere().getTime()));
+            preparedStatement.setDouble(5, iTist.getSalariu());
+            preparedStatement.setString(6, iTist.getServere().toString());
+            preparedStatement.setInt(7, iTist.getMembruId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateAutor(Autor autor) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.UPDATE_AUTOR);
+            preparedStatement.setString(1, autor.getNume());
+            preparedStatement.setString(2, autor.getPrenume());
+            preparedStatement.setString(3, autor.getStatut());
+            preparedStatement.setDate(4, new java.sql.Date(autor.getDataInscriere().getTime()));
+            preparedStatement.setDouble(5, autor.getPopularitate());
+            preparedStatement.setDouble(6, autor.getDiscount());
+            preparedStatement.setString(7, autor.getDescriere());
+            preparedStatement.setInt(8, autor.getMembruId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteCarte(Carte carte) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.DELETE_BOOK);
+            preparedStatement.setInt(1, carte.getCarteId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteBibliotecar(Bibliotecar bibliotecar) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.DELETE_BIBLIOTECAR);
+            preparedStatement.setInt(1, bibliotecar.getMembruId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteItist(ITist iTist) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.DELETE_ITIST);
+            preparedStatement.setInt(1, iTist.getMembruId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteAripa(Aripa aripa) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.getDbConnection().prepareStatement(Queries.DELETE_ARIPA);
+            preparedStatement.setInt(1, aripa.getAripaId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

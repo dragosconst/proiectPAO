@@ -28,4 +28,14 @@ public interface BiblRepo {
     int addAutor(Autor autor);
     int addBibliotecar(Bibliotecar bibliotecar);
     int addItist(ITist iTist);
+
+    void updateAripa(Aripa aripa);
+    void updateSectiune(Sectiune sectiune);
+    void updateItist(ITist iTist);
+    void updateAutor(Autor autor);
+
+    void deleteCarte(Carte carte);
+    void deleteBibliotecar(Bibliotecar bibliotecar);
+    void deleteItist(ITist iTist);
+    void deleteAripa(Aripa aripa);
 }

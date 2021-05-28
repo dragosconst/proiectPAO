@@ -32,4 +32,22 @@ public class Queries {
                                                    "VALUES(null, ?, ?, ?, ?, ?, ?);";
     public static final String INSERT_NEW_SECTIUNE = "INSERT INTO sectiune(sectiuneId, denumire, genuri, discount, aripaId)\n" +
                                                     "VALUES(null, ?, ?, ?, ?)";
+
+    public static final String UPDATE_ARIPA = "UPDATE aripa\n" +
+                                            "SET denumire=?, discount=?\n" +
+                                            "WHERE aripaId=?;";
+    public static final String UPDATE_SECTIUNE = "UPDATE sectiune\n" +
+                                            "SET denumire=?, genuri=?, discount=?\n" +
+                                            "WHERE sectiuneId=?;";
+    public static final String UPDATE_ITIST = "UPDATE itist\n" +
+                                            "SET nume=?, prenume=?, statut=?, data_inscriere=?, salariu=?, servere=?\n" +
+                                            "WHERE membruId=?;";
+    public static final String UPDATE_AUTOR = "UPDATE autor\n" +
+                                            "SET nume=?, prenume=?, statut=?, data_inscriere=?, popularitate=?, discount=?, descriere=?\n" +
+                                            "WHERE membruId=?;";
+
+    public static final String DELETE_BOOK = "DELETE FROM carte WHERE carteId = ?;";
+    public static final String DELETE_BIBLIOTECAR = "DELETE FROM bibliotecar WHERE membruId = ?;";
+    public static final String DELETE_ITIST = "DELETE FROM itist WHERE membruId = ?;";
+    public static final String DELETE_ARIPA = "DELETE FROM aripa WHERE aripaId = ?;";
 }

@@ -66,6 +66,8 @@ public class MainMenu {
         System.out.println("11. Genereaza csv cu toata biblioteca");
         System.out.println("12. Incarca biblioteca salvata");
         System.out.println("13. Incarca biblioteca din baza de date");
+        System.out.println("14. Sterge o carte");
+        System.out.println("15. Editeaza o aripa");
     }
 
     public void handleResponse(int resp) {
@@ -113,6 +115,12 @@ public class MainMenu {
         }
         else if(resp == 13) {
             this.biblioteca = this.loadFromDb();
+        }
+        else if(resp == 14) {
+            this.deleteBook();
+        }
+        else if(resp == 15) {
+            this.editAripa();
         }
         else {
             System.out.println("Ai introdus o comanda care nu exista");
@@ -469,7 +477,7 @@ public class MainMenu {
             this.biblioteca.setAripi(crAripa);
         }
         else {
-            this.addSectiune();
+            this.addAripa();
         }
     }
 
@@ -528,5 +536,49 @@ public class MainMenu {
         //  public Biblioteca(HashSet<Aripa> aripi, HashSet<Sectiune> sectiuni, HashSet<Angajat> angajati, TreeSet<Autor> autori, TreeSet<Carte> carti) {
         //
         return new Biblioteca(aripi, sectiuni, angajati, autori, carti);
+    }
+
+    private void deleteBook() {
+        Scanner lsc = new Scanner(System.in);
+
+        System.out.println("Ce carte vrei sa stergi? introdu id-ul");
+        List<Integer> possibleIds = new ArrayList<>();
+        for(Carte carte: this.biblioteca.getCarti()) {
+            System.out.println("-------------------------------");
+            System.out.println(carte.getCarteId() + ".) " +carte.getDenumire());
+            possibleIds.add(carte.getCarteId());
+        }
+        Integer carteId = parseInput(lsc, possibleIds);
+        Carte carte = this.biblioteca.getCarti().stream().filter(c -> c.getCarteId() == carteId).findFirst().get();
+
+        BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+        dbInstance.deleteCarte(carte);
+        this.biblioteca.getCarti().remove(carte);
+    }
+
+    private void editAripa() {
+        System.out.println("Ce aripa vrei sa editezi? introdu id-ul");
+        Scanner lsc = new Scanner(System.in);
+        List<Integer> posIds = new ArrayList<>();
+        for(Aripa aripa: this.biblioteca.getAripi()) {
+            System.out.println("----------------------------");
+            System.out.println(Integer.toString(aripa.getAripaId()) + ".)"  + aripa.getDenumire());
+            posIds.add(aripa.getAripaId());
+        }
+        Integer aripaId = parseInput(lsc, posIds);
+        Aripa aripa = this.biblioteca.findAripa(aripaId);
+        lsc.nextLine();
+
+        System.out.println("Introduce denumirea noua a aripii");
+        String name = lsc.nextLine();
+
+        Aripa aripa_n = new Aripa(name, 0.0);
+        System.out.println("E ok editarea adaugata?");
+        String resp = lsc.nextLine();
+        if(resp.toLowerCase(Locale.ROOT).contains("da")) {
+            aripa.setDenumire(aripa_n.getDenumire());
+            BiblRepoImpl dbInstance = BiblRepoImpl.getInstance();
+            dbInstance.updateAripa(aripa);
+        }
     }
 }
